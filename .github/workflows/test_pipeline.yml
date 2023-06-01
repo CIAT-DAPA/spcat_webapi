@@ -99,7 +99,7 @@ jobs:
         commit_message: "Update version to ${{ steps.taggerDryRun.outputs.new_tag }}"
     # API Zip
     - name: Zip artifact for deployment
-      run: zip releaseAPI.zip ./src/* -r
+      run: cd ./src && zip -r ../releaseAPI.zip ./* && cd ..
     # Upload Artifacts
     - name: Upload ORM artifact for deployment job
       uses: actions/upload-artifact@v3

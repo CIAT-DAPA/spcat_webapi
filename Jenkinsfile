@@ -8,8 +8,6 @@ pipeline {
         server_name = credentials('name_spcat')
         server_host = credentials('host_spcat')
         ssh_key = credentials('spcat_key')
-        port_api = credentials('api_spcat_port')
-        conectino_db = credentials('connection_db_spcat')
     }
 
     stages {
@@ -85,7 +83,7 @@ pipeline {
                         # Download the latest release from GitHub
                         cd ./api_SPCAT
                         rm -rf releaseApi.zip
-                        curl -LOk https://github.com/victor-993/spcat_webapi/releases/latest/download/releaseApi.zip
+                        curl -LOk https://github.com/CIAT-DAPA/spcat_webapi/releases/latest/download/releaseApi.zip
                         rm -rf api_actual
                         unzip releaseApi.zip -d api_actual
                     '''
@@ -112,7 +110,6 @@ pipeline {
         stage('Start API') {
             steps {
                 script {
-                    def port = port_api
                     sshCommand remote: remote, command: '''
                         # Configure variables for deployment
                         while IFS= read -r line; do

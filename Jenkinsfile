@@ -36,7 +36,6 @@ pipeline {
                             python3 -m venv env
                         fi
                     '''
-                    
                 }
             }
         }
@@ -179,6 +178,12 @@ pipeline {
                     PID_API_SPCAT=$!
                     echo $PID_API_SPCAT > ../pid.txt
                 '''
+            }
+        }
+
+        success {
+            script {
+                echo 'everything went very well!!'
             }
         }
     }

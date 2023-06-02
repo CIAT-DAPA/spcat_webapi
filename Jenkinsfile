@@ -183,7 +183,7 @@ pipeline {
 
         success {
             script {
-                echo 'everything went very well!'
+                echo 'everything went very well!!'
             }
         }
     }

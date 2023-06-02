@@ -20,9 +20,6 @@ pipeline {
                     remote.user = ssh_key_USR
                     remote.name = server_name
                     remote.host = server_host
-
-                    echo 'Hello world'
-                    echo 'Hello world2'
                     
                 }
             }
@@ -44,7 +41,7 @@ pipeline {
             }
         }
         
-        /* stage('Stop previous API') {
+        stage('Stop previous API') {
             steps {
                 script {
                     sshCommand remote: remote, command: '''
@@ -154,10 +151,10 @@ pipeline {
                     }
                 }
             }
-        } */
+        }
     }
 
-    /* post {
+    post {
         failure {
             script {
                 sshCommand remote: remote, command: '''
@@ -186,7 +183,9 @@ pipeline {
         }
 
         success {
-            echo 'everything went very well!'
+            script {
+                echo 'everything went very well!'
+            }
         }
-    } */
+    }
 }

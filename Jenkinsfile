@@ -22,6 +22,7 @@ pipeline {
                     remote.host = server_host
 
                     echo 'Hello world'
+                    echo 'Hello world2'
                     
                 }
             }

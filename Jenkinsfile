@@ -181,5 +181,9 @@ pipeline {
                 '''
             }
         }
+
+        success {
+            echo 'everything went very well!'
+        }
     }
 }

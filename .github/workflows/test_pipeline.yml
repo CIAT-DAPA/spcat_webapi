@@ -90,7 +90,7 @@ jobs:
         ref: main
     - name: Update version
       run: |
-        sed -i "s/"version"=".*"/version="${{ steps.taggerDryRun.outputs.new_tag }}"/" src/static/swagger.json
+        sed -i "s/"version": ".*"/version: "${{ steps.taggerDryRun.outputs.new_tag }}"/" src/static/swagger.json
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Commit changes

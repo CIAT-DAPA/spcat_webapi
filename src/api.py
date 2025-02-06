@@ -7,8 +7,9 @@ from config import config
 from flask_swagger_ui import get_swaggerui_blueprint
 
 from modules.country import Countries
+from modules.projects import Projects
 from modules.crops import Crops, Groups
-from modules.accessions import AccessionsByIDCrop, AccessionsByIDGroup
+from modules.accessions import AccessionsByIDCrop,AccessionsByIDCropProject, AccessionsByIDGroup
 
 app = Flask(__name__)
 CORS(app)
@@ -32,10 +33,12 @@ def send_static(path):
     return send_from_directory('static',path)
 
 api.add_resource(Countries, '/api/v1/countries')
+api.add_resource(Projects, '/api/v1/projects')
 api.add_resource(Crops, '/api/v1/crops')
 api.add_resource(Groups, '/api/v1/groups')
 api.add_resource(AccessionsByIDCrop, '/api/v1/accessionsbyidcrop')
 api.add_resource(AccessionsByIDGroup, '/api/v1/accessionsbyidgroup')
+api.add_resource(AccessionsByIDCropProject, '/api/v1/accessionsbyidcropproject')
 
 
 

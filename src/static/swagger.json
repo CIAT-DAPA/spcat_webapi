@@ -16,6 +16,10 @@
   ],
   "tags": [
     {
+      "name": "project",
+      "description": "Everything about projects"
+    },
+    {
       "name": "country",
       "description": "Everything about countries"
     },
@@ -29,6 +33,31 @@
     }
   ],
   "paths": {
+    "/api/v1/projects": {
+      "get": {
+        "tags": [
+          "project"
+        ],
+        "summary": "List projects",
+        "description": "Returns a list of all projects",
+        "operationId": "getProjects",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/countries": {
       "get": {
         "tags": [
@@ -205,6 +234,75 @@
         }
       }
     },
+    "/api/v1/accessionsbyidcropproject": {
+      "get": {
+        "tags": [
+          "accession"
+        ],
+        "summary": "Finds Accessions by Crop Id(s), Iso 2 country and Project Ext_id",
+        "description": "Multiple Crop Ids can be provided with comma separated strings",
+        "operationId": "getAccessionsbyidcropproject",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Crop IDs to filter by. e.g:64094b58b307071b4e72e908,64094b58b307071b4e72e907",
+            "required": true,
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "iso",
+            "in": "query",
+            "description": "Iso 2 country to filter by. e.g:AR",
+            "required": true,
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "description": "Project ext_id to filter by. e.g:bolder",
+            "required": true,
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/AccessionByIdCropProject"
+                      }
+                    }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
     "/api/v1/accessionsbyidgroup": {
       "get": {
         "tags": [
@@ -288,6 +386,29 @@
         },
         "xml": {
           "name": "country"
+        }
+      },
+      "Project": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Id Project.",
+            "example": "640945c244d7c73ce4090301"
+          },
+          "name": {
+            "type": "string",
+            "description": "Project name.",
+            "example": "BOLDER"
+          },
+          "ext_id": {
+            "type": "string",
+            "description": "Extern Id to identify for project.",
+            "example": "bolder"
+          }
+        },
+        "xml": {
+          "name": "project"
         }
       },
       "Crop": {
